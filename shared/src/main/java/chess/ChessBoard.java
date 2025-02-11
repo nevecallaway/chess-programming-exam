@@ -55,6 +55,14 @@ public class ChessBoard {
         board[endRow][endCol] = movingPiece;
         board[startRow][startCol] = null;
     }
+    //Helper function for ChessGame
+    public void copyBoard(ChessBoard other) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                this.board[row][col] = other.board[row][col];
+            }
+        }
+    }
 
     /**
      * Sets the board to the default starting board
