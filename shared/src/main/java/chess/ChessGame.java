@@ -9,16 +9,19 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessGame {
+    private TeamColor currentTurn;
+    private ChessBoard board;
 
     public ChessGame() {
-
+        this.currentTurn = TeamColor.WHITE;
+        this.board = new ChessBoard();
     }
 
     /**
      * @return Which team's turn it is
      */
     public TeamColor getTeamTurn() {
-        throw new RuntimeException("Not implemented");
+        return currentTurn;
     }
 
     /**
@@ -27,7 +30,7 @@ public class ChessGame {
      * @param team the team whose turn it is
      */
     public void setTeamTurn(TeamColor team) {
-        throw new RuntimeException("Not implemented");
+        currentTurn = team;
     }
 
     /**
@@ -56,7 +59,10 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
-        throw new RuntimeException("Not implemented");
+        ChessPosition start = move.getStartPosition();
+        ChessPiece startPiece = board.getPiece(start);
+
+
     }
 
     /**
