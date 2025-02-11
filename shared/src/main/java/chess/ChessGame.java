@@ -67,7 +67,7 @@ public class ChessGame {
             tempGame.setTeamTurn(getTeamTurn());
 
             // Check if the move leaves the king in check
-            if (!tempGame.isInCheck(getTeamTurn())) {
+            if (!tempGame.isInCheck(startPiece.getTeamColor())) {
                 validMoves.add(move);
             }
         }
