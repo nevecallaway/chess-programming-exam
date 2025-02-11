@@ -94,7 +94,21 @@ public class ChessGame {
         if (validMoves == null || !validMoves.contains(move)) {
             throw new InvalidMoveException("Not a valid move.");
         }
-        board.movePiece(move);
+        // Check for pawn promotion
+        if (startPiece.getPieceType() == ChessPiece.PieceType.PAWN) {
+            int endRow = end.getRow();
+            int promotionRow = (startPiece.getTeamColor() == TeamColor.WHITE) ? 8 : 1;
+            if (endRow == promotionRow) {
+                // Promote the pawn
+                ChessPiece promotedPiece = new ChessPiece(startPiece.getTeamColor(), move.getPromotionPiece());
+                board.addPiece(end, promotedPiece);
+                board.addPiece(start, null); // Remove the pawn from the start position
+            } else {
+                board.movePiece(move);
+            }
+        } else {
+            board.movePiece(move);
+        }
         setTeamTurn((getTeamTurn() == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE);
     }
 
