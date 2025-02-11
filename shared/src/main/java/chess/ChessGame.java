@@ -59,6 +59,21 @@ public class ChessGame {
         return validMoves;
     }
 
+    //Helper function, copy board
+    private ChessBoard copyBoard() {
+        ChessBoard newBoard = new ChessBoard();
+        for (int i = 1; i < 9; i++) {
+            for (int j = 1; j < 9; j++) {
+                ChessPosition position = new ChessPosition(i, j);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null) {
+                    newBoard.addPiece(position, new ChessPiece(piece.getTeamColor(), piece.getPieceType()));
+                }
+            }
+        }
+        return newBoard;
+    }
+
     /**
      * Makes a move in a chess game
      *
