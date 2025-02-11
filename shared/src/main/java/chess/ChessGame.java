@@ -16,6 +16,7 @@ public class ChessGame {
     public ChessGame() {
         this.currentTurn = TeamColor.WHITE;
         this.board = new ChessBoard();
+        this.board.resetBoard();
     }
 
     /**
@@ -65,6 +66,7 @@ public class ChessGame {
             tempGame.setBoard(tempBoard);
             tempGame.setTeamTurn(getTeamTurn());
 
+            // Check if the move leaves the king in check
             if (!tempGame.isInCheck(getTeamTurn())) {
                 validMoves.add(move);
             }
