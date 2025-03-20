@@ -1,29 +1,28 @@
 package dataaccess;
 
 import model.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserDAO {
-    public void UserData getUser(String username) throws DataAccessException {
-        try {
-            // Implementation to find user by username
-        } catch (Exception e) {
-            throw new DataAccessException("Error accessing user data", e);
-        }
+    private Map<String, UserData> users = new HashMap<>();
+    private Map<String, AuthData> authDataMap = new HashMap<>();
+
+    public UserData getUser(String username) throws DataAccessException {
+        return users.get(username);
     }
 
     public void createUser(UserData userData) throws DataAccessException {
-        try {
-            // Implementation to create user
-        } catch (Exception e) {
-            throw new DataAccessException("Error creating user data", e);
+        if (users.containsKey(userData.username())) {
+            throw new DataAccessException("User already exists");
         }
+        users.put(userData.username(), userData);
     }
 
     public void createAuth(AuthData authData) throws DataAccessException {
-        try {
-            // Implementation to create auth data
-        } catch (Exception e) {
-            throw new DataAccessException("Error creating auth data", e);
+        if (authDataMap.containsKey(authData.getToken())) {
+            throw new DataAccessException("Auth token already exists");
         }
+        authDataMap.put(authData.getToken(), authData);
     }
 }

@@ -1,3 +1,19 @@
 package model;
 
-public record AuthData(String authToken, String username) {}
+public class AuthData {
+    private String token;
+    private String username;
+
+    public AuthData(String token, String username) {
+        this.token = token;
+        this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+}

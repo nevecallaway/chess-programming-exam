@@ -1,5 +1,5 @@
 package server;
 
-public class LogoutHandler implements Route {
+public class LogoutHandler /*implements Route*/ {
     // Implementation
 }
