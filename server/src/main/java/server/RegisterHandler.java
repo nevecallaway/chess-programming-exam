@@ -20,11 +20,8 @@ public class RegisterHandler implements Route {
     @Override
     public Object handle(Request req, Response res) throws Exception {
         try {
-            String username = req.queryParams("username");
-            String password = req.queryParams("password");
-            String email = req.queryParams("email");
-
-            RegisterRequest registerRequest = new RegisterRequest(username, password, email);
+            // Parse JSON request body
+            RegisterRequest registerRequest = gson.fromJson(req.body(), RegisterRequest.class);
             RegisterResult result = userService.register(registerRequest);
 
             res.status(200);
@@ -33,7 +30,24 @@ public class RegisterHandler implements Route {
         } catch (DataAccessException e) {
             res.status(409);
             res.type("application/json");
-            return gson.toJson(new Exception("User already exists"));
+            return gson.toJson(new ErrorResponse("User already exists"));
+        } catch (Exception e) {
+            res.status(500);
+            res.type("application/json");
+            return gson.toJson(new ErrorResponse("Internal server error"));
+        }
+    }
+
+    // Error response class
+    private static class ErrorResponse {
+        private final String message;
+
+        public ErrorResponse(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 }
