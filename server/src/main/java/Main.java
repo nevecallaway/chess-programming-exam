@@ -1,4 +1,5 @@
 import chess.*;
+import dataaccess.DataAccessException;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +7,10 @@ public class Main {
         System.out.println("♕ 240 Chess Server: " + piece);
 
         Server server = new Server();
-        server.run(8080);
+        try {
+            server.run(8080);
+        } catch (DataAccessException e) {
+            System.err.println("Failed to start server: " + e.getMessage());
+        }
     }
 }

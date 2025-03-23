@@ -1,12 +1,19 @@
 package dataaccess;
 
 import model.*;
+
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserDAO {
     private Map<String, UserData> users = new HashMap<>();
     private Map<String, AuthData> authDataMap = new HashMap<>();
+    private final Connection conn;
+
+    public UserDAO(Connection conn) {
+        this.conn = conn;
+    }
 
     public UserData getUser(String username) throws DataAccessException {
         return users.get(username);
